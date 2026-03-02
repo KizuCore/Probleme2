@@ -3,14 +3,14 @@
 
 ---
 
-## 👥 Membres
+## Membres
 
 - Théo Guérin  
 - Quentin Guillemand  
 
 ---
 
-# 🎯 Objectif
+# Objectif
 
 L’objectif de ce projet est de :
 
@@ -22,18 +22,18 @@ L’objectif de ce projet est de :
 
 ---
 
-# 🖥️ 1️⃣ Installation de la machine virtuelle
+# 1️⃣ Installation de la machine virtuelle
 
-## 📦 ISO utilisée
+## ISO utilisée
 
 Debian 13.3.0 amd64 – version Netinst  
 https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.3.0-amd64-netinst.iso
 
-La version **Netinst** permet une installation légère et propre, en téléchargeant uniquement les paquets nécessaires.
+> La version **Netinst** permet une installation légère et propre, en téléchargeant uniquement les paquets nécessaires.
 
 ---
 
-## 🧱 Création de la VM (VirtualBox)
+## Création de la VM (VirtualBox)
 
 [Lien téléchargement VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
@@ -64,13 +64,13 @@ Dans VirtualBox :
 | Disque | 20 Go |
 | Use EFI | Désactivé |
 
-Cette configuration permet un fonctionnement fluide tout en restant réaliste pour un serveur léger.
+> Cette configuration permet un fonctionnement fluide tout en restant réaliste pour un serveur léger.
 
 Cliquez ensuite sur **Finish**.
 
 ---
 
-# 🌐 2️⃣ Configuration réseau (IMPORTANT)
+# 2️⃣ Configuration réseau (IMPORTANT)
 
 Avant de lancer la machine virtuelle :
 
@@ -82,21 +82,21 @@ NAT → **Accès par pont (Bridged Adapter)**
 
 Puis cliquer sur **OK**.
 
-Ce mode permet :
-
-- D’obtenir une adresse IP locale
-- D’accéder au serveur depuis la machine hôte
-- De tester Fail2ban dans des conditions réelles
+> Ce mode permet :
+> 
+> - D’obtenir une adresse IP locale
+> - D’accéder au serveur depuis la machine hôte
+> - De tester Fail2ban dans des conditions réelles
 
 ---
 
-# 🐧 3️⃣ Installation de Debian
+# 3️⃣ Installation de Debian
 
 Démarrer la VM.
 
 ---
 
-# 🔎 4️⃣ Vérification de l’installation
+# 4️⃣ Vérification de l’installation
 
 Depuis la VM ouvrer un terminal :
 
@@ -112,11 +112,11 @@ inet 192.168.x.x
 
 Exemple : 192.168.50.89
 
-Conserver cette IP elle sera utilisée pour accéder à la VM et au site.
+> Conserver cette IP elle sera utilisée pour accéder à la VM et au site.
 
 ---
 
-# ⚙️ 5️⃣ Configuration de sudo
+# 5️⃣ Configuration de sudo
 
 Si `sudo` n’est pas installé :
 
@@ -132,11 +132,11 @@ Ajouter l’utilisateur au groupe sudo :
 usermod -aG sudo user
 ```
 
-Cette étape permet d’exécuter des commandes administratives sans utiliser directement le compte root.
+> Cette étape permet d’exécuter des commandes administratives sans utiliser directement le compte root.
 
 ---
 
-# 🔐 6️⃣ Connexion SSH à la machine virtuelle
+# 6️⃣ Connexion SSH à la machine virtuelle
 
 ## Vérifier si SSH est installé
 
@@ -159,7 +159,7 @@ Puis :
 sudo systemctl status ssh
 ```
 
-Si la commande retourne active (running) le service est bien démarré. 
+> Si la commande retourne active (running) le service est bien démarré. 
 
 ---
 
@@ -186,11 +186,11 @@ whoami
 hostname
 ```
 
-Si le nom d’utilisateur et le nom de la VM s’affichent, la connexion fonctionne.
+> Si le nom d’utilisateur et le nom de la VM s’affichent, la connexion fonctionne.
 
 ---
 
-# 📦 7️⃣ Installation des dépendances du projet
+# 7️⃣ Installation des dépendances du projet
 
 ```bash
 sudo apt update
@@ -200,16 +200,16 @@ sudo apt install python3 python3-pip python3-venv caddy fail2ban curl -y
 
 ### Rôle des dépendances
 
-- **python3** : exécution de l’application web  
-- **python3-pip** : installation des bibliothèques Python  
-- **python3-venv** : création d’un environnement virtuel isolé  
-- **caddy** : reverse proxy  
-- **fail2ban** : protection contre les attaques répétées  
-- **curl** : tests HTTP et simulation d’attaques  
+> - **python3** : exécution de l’application web  
+> - **python3-pip** : installation des bibliothèques Python  
+> - **python3-venv** : création d’un environnement virtuel isolé  
+> - **caddy** : reverse proxy  
+> - **fail2ban** : protection contre les attaques répétées  
+> - **curl** : tests HTTP et simulation d’attaques  
 
 ---
 
-# 🌐 8️⃣ Création de l’environnement de travail
+# 8️⃣ Création de l’environnement de travail
 
 Nous créons un dossier dédié au projet afin d’organiser proprement les fichiers :
 
@@ -226,7 +226,7 @@ Ce dossier contiendra :
 
 ---
 
-# 📝 9️⃣ Création de l’application web minimale
+# 9️⃣ Création de l’application web minimale
 
 Le sujet demande un site dynamique (et non un simple fichier HTML statique) avec des identifiants directement intégrés dans le code.
 
@@ -240,7 +240,7 @@ nano app.py
 
 (ou `vim app.py` selon votre préférence)
 
-## 📄 Contenu du fichier `app.py`
+## Contenu du fichier `app.py`
 
 ```python
 from flask import Flask, request
@@ -289,14 +289,14 @@ if __name__ == "__main__":
 
 ### Explication
 
-- Les identifiants sont codés en dur conformément aux consignes.
-- Le contenu HTML est généré dynamiquement par Flask.
-- Chaque échec de connexion génère une entrée dans un fichier de log.
-- Ces logs seront analysés par Fail2ban pour détecter une activité suspecte.
+> - Les identifiants sont codés en dur conformément aux consignes.
+> - Le contenu HTML est généré dynamiquement par Flask.
+> - Chaque échec de connexion génère une entrée dans un fichier de log.
+> - Ces logs seront analysés par Fail2ban pour détecter une activité suspecte.
 
 ---
 
-# 📄 🔟 Création du fichier requirements.txt
+# 🔟 Création du fichier requirements.txt
 
 Créer le fichier :
 
@@ -315,31 +315,31 @@ Ce fichier permet d’installer automatiquement les dépendances Python nécessa
 
 ---
 
-# 🧪 1️⃣1️⃣ Création de l’environnement virtuel
+# 1️⃣1️⃣ Création de l’environnement virtuel
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-L’apparition de `(venv)` dans le terminal confirme que l’environnement est actif.
-
-L’utilisation d’un environnement virtuel permet d’isoler les dépendances du projet du reste du système.
+> L’apparition de `(venv)` dans le terminal confirme que l’environnement est actif.
+> 
+> L’utilisation d’un environnement virtuel permet d’isoler les dépendances du projet du reste du système.
 
 ---
 
-# 📥 1️⃣2️⃣ Installation des dépendances Python
+# 1️⃣2️⃣ Installation des dépendances Python
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Cette commande installe Flask et Gunicorn dans l’environnement isolé.
+> Cette commande installe Flask et Gunicorn dans l’environnement isolé.
 
 ---
 
 
-# 🚀 1️⃣3️⃣ Lancement de l’application avec Gunicorn
+# 1️⃣3️⃣ Lancement de l’application avec Gunicorn
 
 ```bash
 gunicorn -w 2 -b 127.0.0.1:5000 app:app
@@ -351,7 +351,7 @@ gunicorn -w 2 -b 127.0.0.1:5000 app:app
 - `-b 127.0.0.1:5000` → écoute en local sur le port 5000
 - `app:app` → fichier `app.py` et variable `app`
 
-L’application est maintenant accessible localement.
+> L’application est maintenant accessible localement.
 
 Ouvrez une deuxième fenêtre SSH, reconnectez-vous, puis vous pouvez tester l'application avec cette commande : 
 
@@ -365,7 +365,7 @@ curl http://127.0.0.1:5000
 
 ---
 
-# 🔁 1️⃣4️⃣ Configuration du Reverse Proxy avec Caddy
+# 1️⃣4️⃣ Configuration du Reverse Proxy avec Caddy
 
 Modifier le fichier :
 
@@ -398,9 +398,9 @@ http://IP_DE_LA_VM
 
 ---
 
-# 🛡️ 1️⃣5️⃣ Configuration du bannissement d’IP avec Fail2ban
+# 1️⃣5️⃣ Configuration du bannissement d’IP avec Fail2ban
 
-## 🎯 Objectif
+## Objectif
 
 Mettre en place un mécanisme de bannissement automatique lorsqu’une activité suspecte est détectée sur la ressource d’authentification.
 
@@ -416,7 +416,7 @@ Chaque échec de connexion génère une entrée dans le fichier :
 
 ---
 
-# 🔎 Création du filtre personnalisé
+# Création du filtre personnalisé
 
 Créer le fichier :
 
@@ -432,11 +432,11 @@ failregex = ECHEC LOGIN - ip=<HOST>
 ignoreregex =
 ```
 
-Ce filtre indique à Fail2ban de détecter les lignes contenant "ECHEC LOGIN" et d’extraire l’adresse IP.
+> Ce filtre indique à Fail2ban de détecter les lignes contenant "ECHEC LOGIN" et d’extraire l’adresse IP.
 
 ---
 
-# ⚙️ Configuration de la jail
+# Configuration de la jail
 
 Modifier (ou créer) le fichier :
 
@@ -459,13 +459,13 @@ bantime = 600
 
 ### Explication des paramètres
 
-- **maxretry = 5** → bannissement après 5 échecs
-- **findtime = 600** → période d’observation de 10 minutes
-- **bantime = 600** → durée de bannissement de 10 minutes
+> - **maxretry = 5** → bannissement après 5 échecs
+> - **findtime = 600** → période d’observation de 10 minutes
+> - **bantime = 600** → durée de bannissement de 10 minutes
 
 ---
 
-# 🔄 Redémarrage de Fail2ban
+# Redémarrage de Fail2ban
 
 ```bash
 sudo systemctl restart fail2ban
@@ -479,7 +479,7 @@ sudo fail2ban-client status
 
 ---
 
-# 🧪 Test du mécanisme
+# Test du mécanisme
 
 ## Simulation d’une attaque brute force
 
@@ -501,11 +501,27 @@ Dans la VM :
 sudo fail2ban-client status app-login
 ```
 
-Si l’adresse IP apparaît dans la liste des IP bannies, cela confirme que le mécanisme fonctionne correctement.
+# Vérification au niveau du pare-feu
+
+Pour vérifier que l’IP est réellement bloquée au niveau système :
+
+```bash
+sudo iptables -L
+```
+
+ou selon la configuration :
+
+```bash
+sudo nft list ruleset
+```
+
+On peut observer qu’une règle temporaire a été ajoutée pour bloquer l’adresse IP détectée comme suspecte.
+
+> Si l’adresse IP apparaît dans la liste des IP bannies, cela confirme que le mécanisme fonctionne correctement.
 
 ---
 
-# ✅ Résultat
+# Résultat
 
 
 Nous avons mis en place :
@@ -516,11 +532,11 @@ Nous avons mis en place :
 - Un mécanisme de bannissement d’IP avec Fail2ban
 - Un test permettant de valider le fonctionnement
 
-Le système bloque automatiquement les adresses IP ayant un comportement suspect sur la page d’authentification, ce qui protège l’application contre les attaques par brute force.
+> Le système bloque automatiquement les adresses IP ayant un comportement suspect sur la page d’authentification, ce qui protège l’application contre les attaques par brute force.
 L’ensemble répond aux exigences du problème 2.
 
 ---
-# 🧠 Architecture mise en place
+# Architecture mise en place
 
 ```
 Navigateur (machine hôte)
