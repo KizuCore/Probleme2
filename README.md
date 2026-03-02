@@ -153,6 +153,14 @@ sudo systemctl start ssh
 sudo systemctl enable ssh
 ```
 
+Puis : 
+
+```bash
+sudo systemctl status ssh
+```
+
+Si la commande retourne active (running) le service est bien démarré. 
+
 ---
 
 ## Connexion depuis la machine hôte
@@ -343,7 +351,13 @@ gunicorn -w 2 -b 127.0.0.1:5000 app:app
 - `-b 127.0.0.1:5000` → écoute en local sur le port 5000
 - `app:app` → fichier `app.py` et variable `app`
 
-L’application est maintenant accessible localement, vous pouvez la tester avec cette commande :
+L’application est maintenant accessible localement.
+
+Ouvrez une deuxième fenêtre SSH, reconnectez-vous, puis vous pouvez tester l'application avec cette commande : 
+
+```bash
+ssh user@IP_DE_LA_VM
+```
 
 ```bash
 curl http://127.0.0.1:5000
@@ -358,6 +372,8 @@ Modifier le fichier :
 ```bash
 sudo nano /etc/caddy/Caddyfile
 ```
+
+Décommentez la ligne reverse_proxy et mettez ceci à la place (la ligne du reverse_proxy) :
 
 Contenu :
 
