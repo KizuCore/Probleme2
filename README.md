@@ -94,21 +94,11 @@ Ce mode permet :
 
 Démarrer la VM.
 
-Choisir :
-
-Graphical Install
-
-Suivre les étapes par défaut :
-
-- Langue : Français
-- Partitionnement : Guided – use entire disk
-- Sélection des paquets : SSH Server + Standard system utilities
-
 ---
 
 # 🔎 4️⃣ Vérification de l’installation
 
-Connexion à la VM puis :
+Depuis la VM ouvrer un terminal :
 
 ```bash
 ip a | grep 192.168
@@ -120,10 +110,9 @@ Repérer l’adresse IP locale :
 inet 192.168.x.x
 ```
 
-
 Exemple : 192.168.50.89
 
-Cette IP sera utilisée pour accéder au site.
+Conserver cette IP elle sera utilisée pour accéder à la VM et au site.
 
 ---
 
