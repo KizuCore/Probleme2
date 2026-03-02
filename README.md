@@ -549,4 +549,23 @@ Application Flask
 ```
 
 ---
+# Références
+
+- Cours de Paul Schuhmacher :
+  https://ftp.pschuhmacher.com/unix/
+
+- Documentation officielle Caddy :  
+  https://caddyserver.com/docs/
+
+- Installation Debian :  
+  https://www.debian.org/releases/stable/installmanual
+
+- Documentation Flask :  
+  https://flask.palletsprojects.com/
+
+- Documentation officielle Fail2ban :  
+  https://fail2ban.readthedocs.io/en/latest/
+
+- Documentation nftables :  
+  https://wiki.nftables.org/
 
