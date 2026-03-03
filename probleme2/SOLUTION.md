@@ -315,7 +315,9 @@ Contenu :
 }
 ```
 
-Redémarrer Caddy :
+> Ce bloc configure Caddy pour écouter sur le port 80 et rediriger les requêtes HTTP vers l’application exécutée localement sur le port 5000.
+
+Appliquez la modification avec la commande :
 
 ```bash
 sudo systemctl reload caddy
@@ -327,6 +329,7 @@ L’application est maintenant accessible depuis la machine hôte via :
 http://IP_DE_LA_VM
 ```
 
+> (Remplacer IP_DE_LA_VM par l’adresse IP de la machine virtuelle.)
 
 ---
 
