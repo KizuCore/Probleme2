@@ -13,6 +13,14 @@ L’objectif de ce projet est de :
 - Configurer une protection contre les attaques brute force (Fail2ban)
 - Tester et valider le fonctionnement
 
+## Pré-requis du sujet
+Conformément à l’énoncé, on suppose une machine Debian neuve, un utilisateur `user` dans le groupe `sudo`, et `nftables` installé et actif.
+
+## Périmètre du guide
+Le cœur du guide traite la mise en place de l’application, de Caddy et de fail2ban.
+Les étapes VirtualBox/installation Debian sont falcutatifs.
+
+
 ---
 
 # 1️⃣ Installation de la machine virtuelle
