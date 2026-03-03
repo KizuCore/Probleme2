@@ -22,7 +22,7 @@ Les étapes VirtualBox/installation Debian sont falcutatifs.
 
 ---
 
-# 1 Configuration de la machine virtuelle
+# 1 - Configuration de la machine virtuelle
 
 Avant de lancer la machine virtuelle :
 
@@ -42,7 +42,7 @@ Puis cliquer sur **OK**.
 
 ---
 
-# 2 Connexion SSH à la machine virtuelle
+# 2 - Connexion SSH à la machine virtuelle
 
 ## Vérifier si SSH est installé
 
@@ -112,7 +112,7 @@ hostname
 
 ---
 
-# 3 Installation des dépendances du projet
+# 3 - Installation des dépendances du projet
 
 ```bash
 sudo apt update
@@ -138,7 +138,7 @@ sudo apt install nano
 
 ---
 
-# 4 Création de l’environnement de travail
+# 4 - Création de l’environnement de travail
 
 Nous créons un dossier dédié au projet afin d’organiser proprement les fichiers :
 
@@ -155,7 +155,7 @@ Ce dossier contiendra :
 
 ---
 
-# 5 Création de l’application web minimale
+# 5 - Création de l’application web minimale
 
 Nous utilisons Flask pour générer dynamiquement la page de connexion et traiter les requêtes POST.
 Le code contient les identifiants codés en dur comme demandé sur le sujet.
@@ -227,7 +227,7 @@ if __name__ == "__main__":
 
 ---
 
-# 6 Création du fichier requirements.txt
+# 6 - Création du fichier requirements.txt
 
 Créer le fichier :
 
@@ -246,7 +246,7 @@ Ce fichier permet d’installer automatiquement les dépendances Python nécessa
 
 ---
 
-# 7 Création de l’environnement virtuel
+# 7 - Création de l’environnement virtuel
 
 ```bash
 python3 -m venv venv
@@ -259,7 +259,7 @@ source venv/bin/activate
 
 ---
 
-# 8 Installation des dépendances Python
+# 8 - Installation des dépendances Python
 
 ```bash
 pip install -r requirements.txt
@@ -270,7 +270,7 @@ pip install -r requirements.txt
 ---
 
 
-# 9 Lancement de l’application avec Gunicorn
+# 9 - Lancement de l’application avec Gunicorn
 
 ```bash
 gunicorn -w 2 -b 127.0.0.1:5000 app:app
@@ -296,7 +296,7 @@ curl http://127.0.0.1:5000
 
 ---
 
-# 10 Configuration du Reverse Proxy avec Caddy
+# 10 - Configuration du Reverse Proxy avec Caddy
 
 Modifier le fichier :
 
@@ -329,7 +329,7 @@ http://IP_DE_LA_VM
 
 ---
 
-# 11 Configuration du bannissement d’IP avec Fail2ban
+# 11 - Configuration du bannissement d’IP avec Fail2ban
 
 ## Objectif
 
