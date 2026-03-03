@@ -91,7 +91,7 @@ Démarrer la VM.
 
 # 4️⃣ Vérification de l’installation
 
-Depuis la VM ouvrer un terminal :
+Depuis la VM, ouvrez un terminal :
 
 ```bash
 ip a | grep 192.168
