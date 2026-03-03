@@ -11,7 +11,7 @@ Nous avons choisi le **problème 2**: configuration d’une application web avec
 
 ## Remarques / Commentaires / Motivations
 
-> Nous avons choisi ce sujet pour travailler une chaîne complète réaliste: application web dynamique, exposition via reverse proxy, et protection active contre le brute force.
+> Nous avons choisi ce sujet, car la mise en place de Fail2ban se rapproche directement des pratiques que nous pouvons rencontrer en entreprise. Notre méconnaissance de cet outil nous a donc naturellement orientés vers celui-ci.
 >
 > Nous avons privilégié un guide exécutable avec commandes vérifiables et tests de validation.
 >
