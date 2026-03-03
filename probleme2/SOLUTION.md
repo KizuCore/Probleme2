@@ -7,8 +7,7 @@
 
 L’objectif de ce projet est de :
 
-- Installer un serveur Debian 13 dans une machine virtuelle
-- Déployer une application web (Flask)
+- Déployer une application web dynamique (Flask)
 - Mettre en place un reverse proxy (Caddy)
 - Configurer une protection contre les attaques brute force (Fail2ban)
 - Tester et valider le fonctionnement
@@ -23,55 +22,7 @@ Les étapes VirtualBox/installation Debian sont falcutatifs.
 
 ---
 
-# 1️⃣ Installation de la machine virtuelle
-
-## ISO utilisée
-
-Debian 13.3.0 amd64 – version Netinst  
-https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.3.0-amd64-netinst.iso
-
-> La version **Netinst** permet une installation légère et propre, en téléchargeant uniquement les paquets nécessaires.
-
----
-
-## Création de la VM (VirtualBox)
-
-[Lien téléchargement VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-
-### Étape 1 – Nouvelle machine
-
-Dans VirtualBox :
-
-- VM Name : Debian-Probleme2
-- Image ISO : sélectionner le fichier netinst téléchargé
-
----
-
-### Étape 2 – Configuration utilisateur
-
-- Username : user
-- Password : password
-- Hostname : Debian-Probleme2
-- Domain : laisser par défaut
-
----
-
-### Étape 3 – Configuration matérielle
-
-| Paramètre | Valeur |
-|------------|--------|
-| RAM | 2048 MB |
-| CPU | 2 |
-| Disque | 20 Go |
-| Use EFI | Désactivé |
-
-> Cette configuration permet un fonctionnement fluide tout en restant réaliste pour un serveur léger.
-
-Cliquez ensuite sur **Finish**.
-
----
-
-# 2️⃣ Configuration réseau (IMPORTANT)
+# 1 Configuration de la machine virtuelle
 
 Avant de lancer la machine virtuelle :
 
@@ -91,53 +42,7 @@ Puis cliquer sur **OK**.
 
 ---
 
-# 3️⃣ Installation de Debian
-
-Démarrer la VM.
-
----
-
-# 4️⃣ Vérification de l’installation
-
-Depuis la VM, ouvrez un terminal :
-
-```bash
-ip a | grep 192.168
-```
-
-Repérer l’adresse IP locale :
-
-```
-inet 192.168.x.x
-```
-
-Exemple : 192.168.50.89
-
-> Conserver cette IP elle sera utilisée pour accéder à la VM et au site.
-
----
-
-# 5️⃣ Configuration de sudo
-
-Si `sudo` n’est pas installé :
-
-```bash
-su -
-apt update
-apt install sudo
-```
-
-Ajouter l’utilisateur au groupe sudo :
-
-```bash
-usermod -aG sudo user
-```
-
-> Cette étape permet d’exécuter des commandes administratives sans utiliser directement le compte root.
-
----
-
-# 6️⃣ Connexion SSH à la machine virtuelle
+# 2 Connexion SSH à la machine virtuelle
 
 ## Vérifier si SSH est installé
 
@@ -161,6 +66,22 @@ sudo systemctl status ssh
 ```
 
 > Si la commande retourne active (running) le service est bien démarré. 
+
+ouvrez un terminal :
+
+```bash
+ip a | grep 192.168
+```
+
+Repérer l’adresse IP locale :
+
+```
+inet 192.168.x.x
+```
+
+Exemple : 192.168.50.89
+
+> Conserver cette IP elle sera utilisée pour accéder à la VM en SSH et au site.
 
 ---
 
@@ -191,12 +112,19 @@ hostname
 
 ---
 
-# 7️⃣ Installation des dépendances du projet
+# 3 Installation des dépendances du projet
 
 ```bash
 sudo apt update
 sudo apt upgrade -y
 sudo apt install python3 python3-pip python3-venv caddy fail2ban curl -y
+```
+Ce guide contient des commandes effectuées avec l’éditeur de texte nano. Il est recommandé pour la suite du SOLUTION.md, mais vous pouvez utiliser l’éditeur de votre choix (par exemple vim). Dans ce cas, il faudra adapter les commandes et les raccourcis en fonction des spécificités de votre éditeur.
+
+Pour installer nano : 
+
+```bash
+sudo apt install nano
 ```
 
 ### Rôle des dépendances
@@ -210,7 +138,7 @@ sudo apt install python3 python3-pip python3-venv caddy fail2ban curl -y
 
 ---
 
-# 8️⃣ Création de l’environnement de travail
+# 4 Création de l’environnement de travail
 
 Nous créons un dossier dédié au projet afin d’organiser proprement les fichiers :
 
@@ -227,11 +155,14 @@ Ce dossier contiendra :
 
 ---
 
-# 9️⃣ Création de l’application web minimale
-
-Le sujet demande un site dynamique (et non un simple fichier HTML statique) avec des identifiants directement intégrés dans le code.
+# 5 Création de l’application web minimale
 
 Nous utilisons Flask pour générer dynamiquement la page de connexion et traiter les requêtes POST.
+Le code contient les identifiants codés en dur comme demandé sur le sujet.
+
+username : `admin`
+password : `password123`
+
 
 Créer le fichier :
 
@@ -290,14 +221,13 @@ if __name__ == "__main__":
 
 ### Explication
 
-> - Les identifiants sont codés en dur conformément aux consignes.
 > - Le contenu HTML est généré dynamiquement par Flask.
-> - Chaque échec de connexion génère une entrée dans un fichier de log.
+> - 6Chaque échec de connexion génère une entrée dans un fichier de log.
 > - Ces logs seront analysés par Fail2ban pour détecter une activité suspecte.
 
 ---
 
-# 🔟 Création du fichier requirements.txt
+# 6 Création du fichier requirements.txt
 
 Créer le fichier :
 
@@ -316,7 +246,7 @@ Ce fichier permet d’installer automatiquement les dépendances Python nécessa
 
 ---
 
-# 1️⃣1️⃣ Création de l’environnement virtuel
+# 7 Création de l’environnement virtuel
 
 ```bash
 python3 -m venv venv
@@ -329,7 +259,7 @@ source venv/bin/activate
 
 ---
 
-# 1️⃣2️⃣ Installation des dépendances Python
+# 8 Installation des dépendances Python
 
 ```bash
 pip install -r requirements.txt
@@ -340,7 +270,7 @@ pip install -r requirements.txt
 ---
 
 
-# 1️⃣3️⃣ Lancement de l’application avec Gunicorn
+# 9 Lancement de l’application avec Gunicorn
 
 ```bash
 gunicorn -w 2 -b 127.0.0.1:5000 app:app
@@ -366,7 +296,7 @@ curl http://127.0.0.1:5000
 
 ---
 
-# 1️⃣4️⃣ Configuration du Reverse Proxy avec Caddy
+# 10 Configuration du Reverse Proxy avec Caddy
 
 Modifier le fichier :
 
@@ -390,7 +320,7 @@ Redémarrer Caddy :
 sudo systemctl reload caddy
 ```
 
-L’application est maintenant accessible via :
+L’application est maintenant accessible depuis la machine hôte via :
 
 ```
 http://IP_DE_LA_VM
@@ -399,7 +329,7 @@ http://IP_DE_LA_VM
 
 ---
 
-# 1️⃣5️⃣ Configuration du bannissement d’IP avec Fail2ban
+# 11 Configuration du bannissement d’IP avec Fail2ban
 
 ## Objectif
 
@@ -491,9 +421,8 @@ for i in {1..10}; do \
 curl -X POST -d "username=test&password=wrong" http://IP_DE_LA_VM/login; \
 done
 ```
-
+> Ici, nous faisons une boucle `for` envoyant 10 requêtes POST successives avec de faux identifiants pour simuler des tentatives de connexion répétées.
 ---
-
 ## Vérification du bannissement
 
 Dans la VM :
@@ -501,6 +430,7 @@ Dans la VM :
 ```bash
 sudo fail2ban-client status app-login
 ```
+> Affiche le statut du jail app-login dans Fail2ban (service actif, IP bannies, etc.).
 
 # Vérification au niveau du pare-feu
 
@@ -518,7 +448,7 @@ sudo nft list ruleset
 
 On peut observer qu’une règle temporaire a été ajoutée pour bloquer l’adresse IP détectée comme suspecte.
 
-> Si l’adresse IP apparaît dans la liste des IP bannies, cela confirme que le mécanisme fonctionne correctement.
+> Si l’adresse IP de votre machine hôte apparaît dans la liste des IP bannies, cela confirme que le mécanisme fonctionne correctement.
 
 ---
 
@@ -534,7 +464,6 @@ Nous avons mis en place :
 - Un test permettant de valider le fonctionnement
 
 > Le système bloque automatiquement les adresses IP ayant un comportement suspect sur la page d’authentification, ce qui protège l’application contre les attaques par brute force.
-L’ensemble répond aux exigences du problème 2.
 
 ---
 # Architecture mise en place
