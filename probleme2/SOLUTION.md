@@ -67,7 +67,7 @@ sudo systemctl status ssh
 
 > Si la commande retourne active (running) le service est bien démarré. 
 
-ouvrez un terminal :
+Ouvrez un terminal :
 
 ```bash
 ip a | grep 192.168
