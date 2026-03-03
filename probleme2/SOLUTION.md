@@ -222,7 +222,7 @@ if __name__ == "__main__":
 ### Explication
 
 > - Le contenu HTML est généré dynamiquement par Flask.
-> - 6Chaque échec de connexion génère une entrée dans un fichier de log.
+> - Chaque échec de connexion génère une entrée dans un fichier de log.
 > - Ces logs seront analysés par Fail2ban pour détecter une activité suspecte.
 
 ---
@@ -252,6 +252,8 @@ Ce fichier permet d’installer automatiquement les dépendances Python nécessa
 python3 -m venv venv
 source venv/bin/activate
 ```
+
+>
 
 > L’apparition de `(venv)` dans le terminal confirme que l’environnement est actif.
 > 
@@ -401,6 +403,8 @@ bantime = 600
 ---
 
 # Redémarrage de Fail2ban
+
+Après modification de la configuration, redémarrez le service afin d’appliquer les changements :
 
 ```bash
 sudo systemctl restart fail2ban
