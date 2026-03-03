@@ -293,6 +293,7 @@ ssh user@IP_DE_LA_VM
 ```bash
 curl http://127.0.0.1:5000
 ```
+> Teste l’accès au serveur local (localhost) sur le port 5000 via une requête HTTP.
 
 ---
 
