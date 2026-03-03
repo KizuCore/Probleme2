@@ -1,12 +1,5 @@
-# Projet – Problème 2  
+﻿# Projet – Problème 2  
 ## Déploiement d’une application web sécurisée sous Debian 13 (VirtualBox)
-
----
-
-## Membres
-
-- Théo Guérin  
-- Quentin Guillemand  
 
 ---
 
@@ -547,28 +540,4 @@ Gunicorn (127.0.0.1:5000 - VM)
         ↓
 Application Flask
 ```
-
----
-# Références
-
-- Cours de Paul Schuhmacher :
-  https://ftp.pschuhmacher.com/unix/
-
-- Documentation officielle Caddy :  
-  https://caddyserver.com/docs/
-
-- Installation Debian :  
-  https://www.debian.org/releases/stable/installmanual
-
-- Documentation Flask :  
-  https://flask.palletsprojects.com/
-
-- Documentation officielle Fail2ban :  
-  https://fail2ban.readthedocs.io/en/latest/
-
-- Documentation nftables :  
-  https://wiki.nftables.org/
-
-- Documentation officielle Gunicorn :  
-  https://gunicorn.org/deploy/
 
